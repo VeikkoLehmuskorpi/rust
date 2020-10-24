@@ -4,6 +4,11 @@ fn main() {
     comments();
     printing();
     primitives();
+    strings();
+    vectors_and_arrays();
+    tuples();
+    destructuring();
+    types();
 }
 
 fn comments() {
@@ -89,4 +94,68 @@ fn primitives() {
     // Shadowing
     let mutable = false;
     println!("{}", mutable); // false
+}
+
+fn strings() {
+    // Typed string
+    let str: &str = "this is a string";
+    println!("{}", str);
+
+    // A heap-allocated string
+    let s: String = "hello world".to_string();
+    println!("{}", s);
+}
+
+#[allow(unused_variables)]
+fn vectors_and_arrays() {
+    let four_ints: [i32;4] = [1, 2, 3, 4];
+    // four_ints.push(5);
+
+    // Dynamic array (vector)
+    let mut ints: Vec<i32> = vec![1, 2, 3, 4];
+    ints.push(5);
+
+    // Immutable view
+    let slice: &[i32] = &ints;
+    println!("{:?}", &slice);
+}
+
+fn tuples() {
+    let x: (i32, &str, f64) = (42, "42", 42.24);
+    println!("{:?}", x);
+}
+
+fn destructuring() {
+    let x: (i32, &str, f64) = (42, "42", 42.24);
+    let (a, b, c) = x;
+    println!("{} {} {}", a, b, c);
+}
+
+#[allow(dead_code)]
+#[allow(unused_variables)]
+fn types() {
+    // Struct
+    struct Point {
+        x: i32,
+        y: i32
+    }
+
+    let point: Point = Point { x: 0, y: 0 };
+    println!("x: {}, y: {}", point.x, point.y);
+
+    // Struct with unnamed fields (tuple struct)
+    struct Point2(i32, i32);
+    let point2: Point2 = Point2(1, 2);
+    println!("{} {}", point2.0, point2.1);
+
+    // Enum
+    enum Direction {
+        Up, Down, Left, Right
+    }
+
+    let up: Direction = Direction::Up;
+
+    // Generics
+    struct Foo<T> { bar: T };
+    // let foo: Foo = Foo { bar: 42 };
 }
